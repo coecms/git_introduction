@@ -487,10 +487,36 @@ As you see, all the later changes that we have made after the addition of toilet
 
 Those changes are now 'detached head' state and will eventually be deleted by the git garbage collection.
 
-## Cloud
+## Not talked about here, but actually quite important:
 
-## Example .gitconfig file
+### Tags
 
+You can tag specific commits, to make it easier to find them.
+For example you might tag a commit to note to yourself that you sent of this particular version to someone for feedback.
+
+That way you can keep working and when you get the feedback, you can go back to exactly the version they are talking about.
+
+### Branches
+
+If you need to make more extensive changes, but you don't want to break a working system while you do so, you can create a branch to work on the feature.
+Once you're confident that it's working, you can merge it back into the master branch (or any other branch).
+
+### Merging
+
+Because git keep track of all changes, it is quite powerful at merging different versions of the code/text automatically.
+
+Occasionally you get merge conflicts that need to be manually resolved.
+
+### Remote repositories
+
+Really big one: github and bitbucket allow you to have remote repositories.
+Those are a bit like remote copies, and make it much easier to work together with others (or work on different computer).
+
+You can link local repositories to remote ones later without losing anything.
+
+## Finally
+
+Here's my version of the `~/.gitconfig` file.
 ```
 [user]
     name = <NAME>
@@ -507,3 +533,7 @@ Those changes are now 'detached head' state and will eventually be deleted by th
     lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
     geturl = config --get remote.origin.url
 ```
+It uses some aliases, so that `git st` is the same as `git status`.
+Particularly useful is the `git lg` command, which gives a nice alternate view of `git log`.
+
+Finally, here's a [Useful git cheat sheet](https://services.github.com/on-demand/downloads/github-git-cheat-sheet.pdf)
