@@ -416,9 +416,21 @@ All the later changes are now 'detached head' and will eventually be deleted by 
 
 ## Cloud
 
-## Useful aliases
+## Example .gitconfig file
 
-    git config --global alias.ci commit
-    git config --global alias.co checkout
-    git config --global alias.st status
-    git config --global alias.lg log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+```
+[user]
+	name = <NAME>
+	email = <EMAIL>
+[color]
+	ui = true
+	status = auto
+	branch = auto
+[alias]
+	co = checkout
+	ci = commit
+	st = status
+  br = branch
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	geturl = config --get remote.origin.url
+```
