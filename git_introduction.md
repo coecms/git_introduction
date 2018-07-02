@@ -125,8 +125,119 @@ It's really important for later understanding that you give a meaningful descrip
 
 If we now look at the status, everything is 'clean':
 
-    git commit -m
-    git commit -a
+    $ git status
+    On branch master
+    nothing to commit, working directory clean
+
+But we can now look at the log file of the repository to see that commit:
+
+    $ git log
+    commit 9ca82997e506894bd7227b8fe5d1a5a7ec43cbb5
+    Author: Holger Wolff <holger.wolff@monash.edu>
+    Date:   Mon Jul 2 11:43:29 2018 +1000
+
+        Initial commit of shopping list
+
+Let's add something else to the shopping list:
+
+    $ nano shpping_list.txt
+    $ git status
+    On branch master
+    Changes not staged for commit:
+      (use "git add <file>..." to update what will be committed)
+      (use "git checkout -- <file>..." to discard changes in working directory)
+
+        modified:   shopping_list.txt
+
+    no changes added to commit (use "git add" and/or "git commit -a")
+
+We can see the modifications with `git diff`
+
+    $ git diff
+    diff --git a/shopping_list.txt b/shopping_list.txt
+    index 3586748..b70e6f7 100644
+    --- a/shopping_list.txt
+    +++ b/shopping_list.txt
+    @@ -1,4 +1,5 @@
+     Eggs
+     Milk
+    +Toilet Paper
+     Berty Bott's every-flavour beans
+
+The plus in front of the toilet paper means that that line has been added.
+But you see that the changes are not yet staged for commit, much less committed.
+
+For that we would have to add them again:
+
+    $ git add shopping_list.txt
+    $ git status
+
+The shopping list is now in the staging area, with the next commit, the toilet paper will become part of the repo.
+
+But what if we made more changes before we commit? Let's try it.
+
+    $ nano shopping_list.txt
+    $ git status
+    On branch master
+    Changes to be committed:
+      (use "git reset HEAD <file>..." to unstage)
+
+    	modified:   shopping_list.txt
+
+    Changes not staged for commit:
+      (use "git add <file>..." to update what will be committed)
+      (use "git checkout -- <file>..." to discard changes in working directory)
+
+    	modified:   shopping_list.txt
+
+The shopping list appears *both* in the staging area *and* in the not staged area.
+That's because some changes of the file will be committed, others will not be:
+
+Let's commit the toilet paper.
+I don't want to start the editor for the message, so I give the message as a command line argument:
+
+    $ git commit -m 'emergency addendum'
+    $ git log
+    commit 341b0e2292d41bda93ea0dde8111f10dee24a4d2
+    Author: Holger Wolff <holger.wolff@monash.edu>
+    Date:   Mon Jul 2 11:59:55 2018 +1000
+
+        emergency addendum
+
+    commit 9ca82997e506894bd7227b8fe5d1a5a7ec43cbb5
+    Author: Holger Wolff <holger.wolff@monash.edu>
+    Date:   Mon Jul 2 11:43:29 2018 +1000
+
+        Initial commit of shopping list
+
+We now have a second commit on top of the previous one.
+
+The staging and commit are so common, that `git` has an shortcut for that:
+
+If we run the command `git commit -a`, all changes to all files that are already tracked, will be added to the staging area and then committed.
+
+    $ git status
+    On branch master
+    Changes not staged for commit:
+      (use "git add <file>..." to update what will be committed)
+      (use "git checkout -- <file>..." to discard changes in working directory)
+
+    	modified:   shopping_list.txt
+
+    no changes added to commit (use "git add" and/or "git commit -a")
+    $ git diff
+    diff --git a/shopping_list.txt b/shopping_list.txt
+    index b70e6f7..bd57568 100644
+    --- a/shopping_list.txt
+    +++ b/shopping_list.txt
+    @@ -1,5 +1,4 @@
+     Eggs
+     Milk
+     Toilet Paper
+    -Berty Bott's every-flavour beans
+    -
+    +Jelly beans
+    $ git commit -a -m "we're only muggles :("
 
 ## Getting things out of the repo
 
