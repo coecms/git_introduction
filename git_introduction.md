@@ -239,6 +239,8 @@ If we run the command `git commit -a`, all changes to all files that are already
     +Jelly beans
     $ git commit -a -m "we're only muggles :("
 
+![Git Into Repo](images/git_into.png)
+
 ## Getting things out of the repo
 
     git checkout
