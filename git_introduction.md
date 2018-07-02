@@ -22,7 +22,8 @@
 
 ## Getting things out of the repo
 
-
+    git checkout
+    git merge
 
 ## Cloud
 
