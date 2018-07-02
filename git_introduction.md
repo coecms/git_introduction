@@ -239,12 +239,12 @@ If we run the command `git commit -a`, all changes to all files that are already
     $ git commit -a -m "we're only muggles :("
     $ git log
 
+![Git Into Repo](images/git_into.png)
+
 How to put data into the repository is the most important part.
 If you properly use `git`, you will be doing this several times per day.
 
 ### Getting things out of the repo
-
-
 
     git checkout
     git merge
