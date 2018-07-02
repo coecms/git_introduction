@@ -271,6 +271,14 @@ $ git commit -a -m "we're only muggles :("
 $ git log
 ```
 
+Let's add some additional things for later.
+
+```plain
+$ nano shopping_list.txt
+<enter Apples between Eggs and Milk, add Bread to the end>
+$ git commit -a -m 'added apples and bread'
+```
+
 ![Git Into Repo](images/git_into.png)
 
 How to put data into the repository is the most important part.
@@ -347,10 +355,10 @@ You can usually get away with just typing the first 4-6 characters, as long as t
 
 You can also use the 'special' commit id of `HEAD` to mean the current commit id.
 
-You can also modify the commit id with `~X` (where X is a number) meaning the commit X positions before the commit ID:
+You can also modify the commit id with a number of `^` meaning the commit that many positions before the commit ID:
 
 ```plain
-$ git show HEAD~1
+$ git show HEAD^
 commit 341b0e2292d41bda93ea0dde8111f10dee24a4d2
 Author: Holger Wolff <holger.wolff@monash.edu>
 Date:   Mon Jul 2 11:59:55 2018 +1000
@@ -371,7 +379,7 @@ index 3586748..b70e6f7 100644
 Or you can check what has been added in the two commits leading up to a specific one:
 
 ```plain
-$ git diff 6254~2 6254
+$ git diff 6254^^ 6254
 diff --git a/shopping_list.txt b/shopping_list.txt
 index 3586748..bd57568 100644
 --- a/shopping_list.txt
@@ -406,6 +414,10 @@ The working directory now looks as it was before we exchanged, but as git warns,
 
 Since our repo has moved past this commit, any changes that we make now will not be part of the master branch, though we could create a new branch from here.
 
+Remember how `git commit -a` was secretly two commands: `git add` followed by `git commit`?
+
+It's similar with the suggestion above: `git checkout -b <new-branch-name>` is secretly two commands: `git branch` and `git checkout`:
+
 ```plain
 $ git branch wizard
 $ git checkout wizard
@@ -420,7 +432,7 @@ $ git commit -a -m 'added degnoming agent'
 $ git log
 ```
 
-We can switch between master and wizarding branch with `git checkout`:
+We can switch between master and wizard branch with `git checkout`:
 
 ```plain
 $ cat shopping_list.txt
@@ -429,6 +441,13 @@ $ cat shopping_list.txt
 $ git checkout wizard
 $ cat shopping_list.txt
 ```
+
+Next we merge the changes that we made to the master branch into the wizard branch:
+
+```plain
+$ git merge master
+```
+
 
 Let's go back to the master branch, and just undo the latest commit.
 
@@ -487,36 +506,10 @@ As you see, all the later changes that we have made after the addition of toilet
 
 Those changes are now 'detached head' state and will eventually be deleted by the git garbage collection.
 
-## Not talked about here, but actually quite important:
+## Cloud
 
-### Tags
+## Example .gitconfig file
 
-You can tag specific commits, to make it easier to find them.
-For example you might tag a commit to note to yourself that you sent of this particular version to someone for feedback.
-
-That way you can keep working and when you get the feedback, you can go back to exactly the version they are talking about.
-
-### Branches
-
-If you need to make more extensive changes, but you don't want to break a working system while you do so, you can create a branch to work on the feature.
-Once you're confident that it's working, you can merge it back into the master branch (or any other branch).
-
-### Merging
-
-Because git keep track of all changes, it is quite powerful at merging different versions of the code/text automatically.
-
-Occasionally you get merge conflicts that need to be manually resolved.
-
-### Remote repositories
-
-Really big one: github and bitbucket allow you to have remote repositories.
-Those are a bit like remote copies, and make it much easier to work together with others (or work on different computer).
-
-You can link local repositories to remote ones later without losing anything.
-
-## Finally
-
-Here's my version of the `~/.gitconfig` file.
 ```
 [user]
     name = <NAME>
@@ -533,7 +526,3 @@ Here's my version of the `~/.gitconfig` file.
     lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
     geturl = config --get remote.origin.url
 ```
-It uses some aliases, so that `git st` is the same as `git status`.
-Particularly useful is the `git lg` command, which gives a nice alternate view of `git log`.
-
-Finally, here's a [Useful git cheat sheet](https://services.github.com/on-demand/downloads/github-git-cheat-sheet.pdf)
