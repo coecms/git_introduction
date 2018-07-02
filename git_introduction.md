@@ -46,7 +46,7 @@ So, before you can use `git` the first time on your computer, you have to tell i
 
 This creates a file called `.gitconfig` in your home directory with these entries:
 
-## Using git
+## Using gito
 
 ### Creating a new repository
 
@@ -62,13 +62,69 @@ We can now inquire about the repo:
     $ git status
 
 As expected, it's empty.
+By the way: When you initialised the repository, the directory did not need to be empty.
+
+`git` has created a subdirectory to track the changes:
+
+    $ ls -aF
+    ./
+    ../
+    .git/
 
 ### Pushing things into the repo
 
+Let's create a shopping list:
 
+    $ nano shopping_list.txt
+    Eggs
+    Milk
+    Berty Bott's every-flavour beans
+    ^O
+    ^X
 
-    git add
-    git commit
+If we now look at the status, we see that `git` recognised there's a new file, but that file isn't tracked yet:
+
+    $ git status
+    On branch master
+
+    Initial commit
+
+    Untracked files:
+      (use "git add <file>..." to include in what will be committed)
+
+    	shopping_list.txt
+
+    nothing added to commit but untracked files present (use "git add" to track)
+
+In order to track the changes to `shopping_list.txt`, we need to add them to the repo:
+
+    $ git add shopping_list.txt
+    $ git status
+    On branch master
+
+    Initial commit
+
+    Changes to be committed:
+      (use "git rm --cached <file>..." to unstage)
+
+    	new file:   shopping_list.txt
+
+The file now shows up under 'files to be committed'.
+This is called the staging area.
+Files and file-changes can be placed in the staging area together to become part of the same commit.
+
+So let's commit them:
+
+    $ git commit
+
+And we land in an editor.
+Here, in the first line, we are asked to give a brief explanation of the commit.
+Note that, as the text suggests, leaving the message empty will abort the commit.
+
+It's really important for later understanding that you give a meaningful description.
+
+If we now look at the status, everything is 'clean':
+
     git commit -m
     git commit -a
 
