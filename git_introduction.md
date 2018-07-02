@@ -469,17 +469,17 @@ Those changes are now 'detached head' state and will eventually be deleted by th
 
 ```
 [user]
-	name = <NAME>
-	email = <EMAIL>
+    name = <NAME>
+    email = <EMAIL>
 [color]
-	ui = true
-	status = auto
-	branch = auto
+    ui = true
+    status = auto
+    branch = auto
 [alias]
-	co = checkout
-	ci = commit
-	st = status
-  br = branch
-	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-	geturl = config --get remote.origin.url
+    co = checkout
+    ci = commit
+    st = status
+    br = branch
+    lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    geturl = config --get remote.origin.url
 ```
