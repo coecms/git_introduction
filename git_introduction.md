@@ -406,6 +406,30 @@ The working directory now looks as it was before we exchanged, but as git warns,
 
 Since our repo has moved past this commit, any changes that we make now will not be part of the master branch, though we could create a new branch from here.
 
+```plain
+$ git branch wizard
+$ git checkout wizard
+$ git status
+```
+
+We can even add new commits to this branch.
+
+```plain
+$ echo "Degnoming Agent" >> shopping_list.txt
+$ git commit -a -m 'added degnoming agent'
+$ git log
+```
+
+We can switch between master and wizarding branch with `git checkout`:
+
+```plain
+$ cat shopping_list.txt
+$ git checkout master
+$ cat shopping_list.txt
+$ git checkout wizard
+$ cat shopping_list.txt
+```
+
 Let's go back to the master branch, and just undo the latest commit.
 
 ```plain
