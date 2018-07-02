@@ -490,8 +490,9 @@ Those are a bit like remote copies, and make it much easier to work together wit
 
 You can link local repositories to remote ones later without losing anything.
 
-## Example .gitconfig file
+## Finally
 
+Here's my version of the `~/.gitconfig` file.
 ```
 [user]
     name = <NAME>
@@ -508,3 +509,7 @@ You can link local repositories to remote ones later without losing anything.
     lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
     geturl = config --get remote.origin.url
 ```
+It uses some aliases, so that `git st` is the same as `git status`.
+Particularly useful is the `git lg` command, which gives a nice alternate view of `git log`.
+
+Finally, here's a [Useful git cheat sheet](https://services.github.com/on-demand/downloads/github-git-cheat-sheet.pdf)
