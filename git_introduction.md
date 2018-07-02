@@ -246,8 +246,173 @@ If you properly use `git`, you will be doing this several times per day.
 
 ### Getting things out of the repo
 
-    git checkout
-    git merge
+This will be much shorter, as you will need this far fewer than putting things into the repo, so by the time you need it you'll have forgotten half of what I'm saying anyway.
+
+Let's have a look at the repo log:
+
+    $ git log
+    commit 62541f516bc19ca30c2a75a262e4efd56ed1d870
+    Author: Holger Wolff <holger.wolff@monash.edu>
+    Date:   Mon Jul 2 12:03:29 2018 +1000
+
+        we're only muggles :(
+
+    commit 341b0e2292d41bda93ea0dde8111f10dee24a4d2
+    Author: Holger Wolff <holger.wolff@monash.edu>
+    Date:   Mon Jul 2 11:59:55 2018 +1000
+
+        emergency addendum
+
+    commit 9ca82997e506894bd7227b8fe5d1a5a7ec43cbb5
+    Author: Holger Wolff <holger.wolff@monash.edu>
+    Date:   Mon Jul 2 11:43:29 2018 +1000
+
+        Initial commit of shopping list
+
+What was the emergency addendum again? Let's have a look.
+
+I'll make a diff between the commit before and after:
+
+    $ git show 341b0e2
+    commit 341b0e2292d41bda93ea0dde8111f10dee24a4d2
+    Author: Holger Wolff <holger.wolff@monash.edu>
+    Date:   Mon Jul 2 11:59:55 2018 +1000
+
+        emergency addendum
+
+    diff --git a/shopping_list.txt b/shopping_list.txt
+    index 3586748..b70e6f7 100644
+    --- a/shopping_list.txt
+    +++ b/shopping_list.txt
+    @@ -1,4 +1,5 @@
+     Eggs
+     Milk
+    +Toilet Paper
+     Berty Bott's every-flavour beans
+
+If we want to check what has changed since an earlier version in the repo, we can use `git diff` again:
+
+    $ git diff 9ca8299
+    diff --git a/shopping_list.txt b/shopping_list.txt
+    index 3586748..bd57568 100644
+    --- a/shopping_list.txt
+    +++ b/shopping_list.txt
+    @@ -1,4 +1,4 @@
+     Eggs
+     Milk
+    -Berty Bott's every-flavour beans
+    +Toilet Paper
+    +Jelly beans
+
+A word about these numbers: These Commit IDs are the unique identifier of each commit.
+You can usually get away with just typing the first 4-6 characters, as long as they are unique in this repo.
+
+You can also use the 'special' commit id of `HEAD` to mean the current commit id.
+
+You can also modify the commit id with `~X` (where X is a number) meaning the commit X positions before the commit ID:
+
+    $ git show HEAD~1
+    commit 341b0e2292d41bda93ea0dde8111f10dee24a4d2
+    Author: Holger Wolff <holger.wolff@monash.edu>
+    Date:   Mon Jul 2 11:59:55 2018 +1000
+
+        emergency addendum
+
+    diff --git a/shopping_list.txt b/shopping_list.txt
+    index 3586748..b70e6f7 100644
+    --- a/shopping_list.txt
+    +++ b/shopping_list.txt
+    @@ -1,4 +1,5 @@
+     Eggs
+     Milk
+    +Toilet Paper
+     Berty Bott's every-flavour beans
+
+Or you can check what has been added in the two commits leading up to a specific one:
+
+    $ git diff 6254~2 6254
+    diff --git a/shopping_list.txt b/shopping_list.txt
+    index 3586748..bd57568 100644
+    --- a/shopping_list.txt
+    +++ b/shopping_list.txt
+    @@ -1,4 +1,4 @@
+    Eggs
+    Milk
+    -Berty Bott's every-flavour beans
+    +Toilet Paper
+    +Jelly beans
+
+What if we want to go back in time to the Wizarding World?
+
+    $ git checkout 341b
+    Note: checking out '341b0e2'.
+
+    You are in 'detached HEAD' state. You can look around, make experimental
+    changes and commit them, and you can discard any commits you make in this
+    state without impacting any branches by performing another checkout.
+
+    If you want to create a new branch to retain commits you create, you may
+    do so (now or later) by using -b with the checkout command again. Example:
+
+      git checkout -b <new-branch-name>
+
+    HEAD is now at 341b0e2... emergency addendum
+
+The working directory now looks as it was before we exchanged, but as git warns, we are now in a so-called detached head state.
+
+Since our repo has moved past this commit, any changes that we make now will not be part of the master branch, though we could create a new branch from here.
+
+Let's go back to the master branch, and just undo the latest commit.
+
+    $ git revert HEAD
+    $ git log
+    commit 2da8f4f074079c0e9c77119a33cf7eb6407c505c
+    Author: Holger Wolff <holger.wolff@monash.edu>
+    Date:   Mon Jul 2 15:13:07 2018 +1000
+
+        Revert "we're only muggles :("
+
+        This reverts commit 62541f516bc19ca30c2a75a262e4efd56ed1d870.
+
+    commit 62541f516bc19ca30c2a75a262e4efd56ed1d870
+    Author: Holger Wolff <holger.wolff@monash.edu>
+    Date:   Mon Jul 2 12:03:29 2018 +1000
+
+        we're only muggles :(
+
+    commit 341b0e2292d41bda93ea0dde8111f10dee24a4d2
+    Author: Holger Wolff <holger.wolff@monash.edu>
+    Date:   Mon Jul 2 11:59:55 2018 +1000
+
+        emergency addendum
+
+    commit 9ca82997e506894bd7227b8fe5d1a5a7ec43cbb5
+    Author: Holger Wolff <holger.wolff@monash.edu>
+    Date:   Mon Jul 2 11:43:29 2018 +1000
+
+        Initial commit of shopping list
+
+This immediately creates a new commit which exactly undoes the changes from the previous commit.
+
+The other way would be to reset the tree:
+
+    $ git reset --hard 341b
+    $ git log
+    commit 341b0e2292d41bda93ea0dde8111f10dee24a4d2
+    Author: Holger Wolff <holger.wolff@monash.edu>
+    Date:   Mon Jul 2 11:59:55 2018 +1000
+
+        emergency addendum
+
+    commit 9ca82997e506894bd7227b8fe5d1a5a7ec43cbb5
+    Author: Holger Wolff <holger.wolff@monash.edu>
+    Date:   Mon Jul 2 11:43:29 2018 +1000
+
+        Initial commit of shopping list
+
+As you see, git has now 'forgotten' all the changes that we have made after the addition of toilet paper.
+
+All the later changes are now 'detached head' and will eventually be deleted by the git garbage collection.
 
 ## Cloud
 
