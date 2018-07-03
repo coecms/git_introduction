@@ -480,33 +480,23 @@ Author: Holger Wolff <holger.wolff@monash.edu>
 Date:   Mon Jul 2 11:43:29 2018 +1000
 
     Initial commit of shopping list
+
+$ cat shopping_list.txt
 ```
 
-This immediately creates a new commit which exactly undoes the changes from the previous commit.
+## Not talked about
 
-The other way would be to reset the tree:
+### Tags
 
-```plain
-$ git reset --hard 341b
-$ git log
-commit 341b0e2292d41bda93ea0dde8111f10dee24a4d2
-Author: Holger Wolff <holger.wolff@monash.edu>
-Date:   Mon Jul 2 11:59:55 2018 +1000
+You can use `git tag` to tag a specific commit.
+Used in software development to note for example the releases, for papers you might want to use which version you sent to colleages for proof-reading, for example.
 
-    emergency addendum
+### Remote repositories
 
-commit 9ca82997e506894bd7227b8fe5d1a5a7ec43cbb5
-Author: Holger Wolff <holger.wolff@monash.edu>
-Date:   Mon Jul 2 11:43:29 2018 +1000
+![Git Remote](images/git_remote.png)
 
-    Initial commit of shopping list
-```
-
-As you see, all the later changes that we have made after the addition of toilet paper are no longer on that list.
-
-Those changes are now 'detached head' state and will eventually be deleted by the git garbage collection.
-
-## Cloud
+This is a huge one for collaboration or working on the same document on different computers.
+Services like Github and Bitbucket allow remote repositories that synchronise to your local repositories.
 
 ## Example .gitconfig file
 
