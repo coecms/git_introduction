@@ -497,6 +497,21 @@ Used in software development to note for example the releases, for papers you mi
 This is a huge one for collaboration or working on the same document on different computers.
 Services like Github and Bitbucket allow remote repositories that synchronise to your local repositories.
 
+### Ignore file
+
+A text file called `.gitignore` (including the leading period) in the base directory of the project which contains lists of files that git should just ignore, for example:
+
+```plain
+*.exe
+*.o
+*.mod
+*.pyc
+build/
+debug/
+```
+
+I usually put the `.gitignore` file itself in the repository.
+
 ## Example .gitconfig file
 
 ```
