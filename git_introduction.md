@@ -530,7 +530,7 @@ I usually put the `.gitignore` file itself in the repository.
     lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
     geturl = config --get remote.origin.url
 [push]
-    default = upstream
+    default = current
 [core]
     autocrlf = input   # replace "input" by "true" on Windows machines.
 ```
