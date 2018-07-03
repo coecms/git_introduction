@@ -427,8 +427,8 @@ $ git status
 We can even add new commits to this branch.
 
 ```plain
-$ echo "Degnoming Agent" >> shopping_list.txt
-$ git commit -a -m 'added degnoming agent'
+$ echo "Butterbeer" >> shopping_list.txt
+$ git commit -a -m 'add butterbeer'
 $ git log
 ```
 
@@ -452,8 +452,7 @@ $ git merge master
 Let's go back to the master branch, and just undo the latest commit.
 
 ```plain
-$ git checkout master
-$ git revert HEAD
+$ git revert <only muggles>
 $ git log
 commit 2da8f4f074079c0e9c77119a33cf7eb6407c505c
 Author: Holger Wolff <holger.wolff@monash.edu>
