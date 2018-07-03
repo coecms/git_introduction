@@ -514,4 +514,8 @@ Services like Github and Bitbucket allow remote repositories that synchronise to
     br = branch
     lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
     geturl = config --get remote.origin.url
+[push]
+    default = upstream
+[core]
+    autocrlf = input   # replace "input" by "true" on Windows machines.
 ```
