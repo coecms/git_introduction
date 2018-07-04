@@ -514,7 +514,7 @@ I usually put the `.gitignore` file itself in the repository.
 
 ## Example .gitconfig file
 
-```
+```plain
 [user]
     name = <NAME>
     email = <EMAIL>
